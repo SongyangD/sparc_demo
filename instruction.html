@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instruction Page</title>
+    <style>
+        /* Additional styles for the collapsible sections */
+        .collapsible,
+        .collapsible-content {
+            width: 80%;
+            margin: auto;
+            /* This centers the elements */
+        }
+
+        .collapsible {
+            background-color: #f1f1f1;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            margin-top: 10px;
+            /* Space between each collapsible button */
+        }
+
+        .collapsible-content {
+            padding: 0 5px;
+            display: none;
+            overflow: hidden;
+            background-color: #f9f9f9;
+            text-align: left;
+            /* This ensures that the content inside is left aligned */
+            width: 80%;
+            margin: auto;
+            /* This centers the collapsible content itself */
+        }
+
+        .code-block {
+            background-color: #f4f4f4;
+            border-left: 4px solid #d1d1d1;
+            font-family: "Courier New", Courier, monospace;
+            overflow-x: auto;
+            padding: 10px;
+            white-space: pre;
+            margin: 0;
+            tab-size: 4;
+            /* Ensures tabs are 4 spaces wide */
+        }
+
+        .active,
+        .collapsible:hover {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="instruction.html">Instructions</a>
+        <a href="index.html">Create Backup Plan by Tag</a>
+        <a href="ondemand.html">Ondemand Backup</a>
+        <a href="csv.html">Check Report</a>
+        
+    </div>
+
+    <div class="container">
+        <h1>How to Get a Valid ARN</h1>
+
+        <!-- Step 1 -->
+        <button class="collapsible">Step 1: Sign in to the AWS Management Console
+        </button>
+        <div class="collapsible-content">
+            <p>Navigate to the IAM dashboard.
+                In the left navigation pane, click on Roles and then choose Create role.
+            </p>
+        </div>
+
+        <!-- Step 2 -->
+        <button class="collapsible">Step 2: Create a New Role</button>
+        <div class="collapsible-content">
+            <p>For the type of trusted entity, select Another AWS account.
+                In the Account ID field, enter the account ID of our service.
+                Click Next: Permissions.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <button class="collapsible">Step 3: Attach Permissions</button>
+        <div class="collapsible-content">
+            <p>Choose the permissions policies that should be attached to this role. For our backup service, you may
+                need permissions related to AWS Backup and any other relevant services that we need to interact with.
+                After selecting the necessary permissions, click Next: Tags (optional).
+            </p>
+        </div>
+
+        <!-- Step 4 -->
+        <button class="collapsible">Step 4: Review and Name the Role</button>
+        <div class="collapsible-content">
+            <p>In the Role name field, provide a name that follows our !!!STRICT NAMING CONVENTION!!!:
+                BackupRole_[YourCompanyName]. For example, if your company's name is "TechCorp", you'd name the role
+                BackupRole_TechCorp.
+                In the Role description, provide a suitable description. For instance, "Role for [Your Service Name] to
+                create backups."
+                Review the settings and click Create role.
+            </p>
+        </div>
+
+        <!-- Step 5 -->
+        <button class="collapsible">Step 5: Edit Trust Relationship</button>
+        <div class="collapsible-content">
+            <p>After creating the role, find it in the list and click on its name.
+                Navigate to the Trust relationships tab and click Edit trust relationship.
+                235405876084 is the AWS account ID of our service.
+                Lambda and backup are the services we will use.
+                Ensure the trust relationship JSON looks similar to the following:
+            </p>
+            <button onclick="copyCode()">Copy Code</button>
+            <pre id="codeBlock" class="code-block"><code>
+                {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "backup.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRole"
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "AWS": "arn:aws:iam::235405876084:root"
+                            },
+                            "Action": "sts:AssumeRole"
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRole"
+                        }
+                    ]
+                }
+                
+                </code></pre>
+        </div>
+
+        <!-- Step 5 -->
+        <button class="collapsible">Step 6: Get your valid ARN</button>
+        <div class="collapsible-content">
+            <p> After you created the role correctly, you can copy the arn of the role, and use it in our services.:)
+            </p>
+        </div>
+        
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <P>SPARC - AWS & UPENN</P>
+            <p>Team 4 - Cost Allocation and Backup Service</p>
+            <p>Team member: Haomin Tian, Songyang Du, Yahan Xu, Zhuori Zhou</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for collapsible sections -->
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+        function copyCode() {
+            let code = document.getElementById("codeBlock").innerText;
+            let textArea = document.createElement("textarea");
+            textArea.value = code;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            alert("Code copied to clipboard!");
+        }
+
+    </script>
+</body>
+
+</html>

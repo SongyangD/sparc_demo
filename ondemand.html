@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ondemand Page</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="instruction.html">Instructions</a>
+        <a href="index.html">Create Backup Plan by Tag</a>
+        <a href="ondemand.html">Ondemand Backup</a>
+        <a href="csv.html">Check Report</a>
+    </div>
+    <div class="container">
+        <h1>Ondemand Backup plan</h1>
+        <form onsubmit="event.preventDefault(); anotherFunction();">
+            <input id="roleArn" type="text" placeholder="Enter Valid Role ARN" required />
+            <button type="submit">Proceed</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <p id="responseMessage"></p>
+    <script>
+        async function anotherFunction() {
+            const API_URL = "https://72lvu5ghwj.execute-api.us-east-1.amazonaws.com/createOnDemandBackup";
+            const roleArn = document.getElementById("roleArn").value;
+            const resultElement = document.getElementById("result");
+
+            // Show a processing message
+            resultElement.textContent = "Processing...";
+
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    role_arn: roleArn
+                })
+            };
+
+            try {
+                const response = await fetch(API_URL, requestOptions);
+                const data = await response.json();
+
+                // Display the result message
+                resultElement.textContent = data.message || "Success!";
+            } catch (error) {
+                // Display error message
+                resultElement.textContent = "An error occurred: " + error.message;
+            }
+        }
+    </script>
+    <footer class="footer">
+        <div class="footer-content">
+            <P>SPARC - AWS & UPENN</P>
+            <p>Team 4 - Cost Allocation and Backup Service</p>
+            <p>Team member: Haomin Tian, Songyang Du, Yahan Xu, Zhuori Zhou</p>
+        </div>
+    </footer>
+</body>
+
+</html>

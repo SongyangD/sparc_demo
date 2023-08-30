@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Backup Page</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="instruction.html">Instructions</a>
+        <a href="index.html">Create Backup Plan by Tag</a>
+        <a href="ondemand.html">Ondemand Backup</a>
+        <a href="csv.html">Check Report</a>
+    </div>
+    <div class="container">
+        <h1>Create Backup Plan by Tag</h1>
+        <form onsubmit="event.preventDefault(); submitForm();" class="backup-form">
+            <input id="roleArn" type="text" placeholder="Enter Valid Role ARN" required />
+            <div class="container">
+                <!-- Dropdown for env tags -->
+                <select id="envTag">
+                    <option value="" disabled selected>tag of the environment</option>
+                    <!-- Add your tag options here -->
+                    <option value="dev">dev</option>
+                    <option value="staging">staging</option>
+                    <option value="prod">prod</option>
+                </select>
+
+                <!-- Dropdown for department tags -->
+                <select id="depTag">
+                    <option value="" disabled selected>tag of the department</option>
+                    <!-- Add your tag options here -->
+                    <option value="hr">HR</option>
+                    <option value="sales">sales</option>
+                    <option value="marketing">marketing</option>
+                </select>
+
+                <!-- Dropdown for backup schedule -->
+                <select id="backupSchedule">
+                    <option value="" disabled selected>Schedule</option>
+                    <!-- Add your schedule options here -->
+                    <option value="6">every 6 hours</option>
+                    <option value="3">every 3 hours</option>
+                    <option value="1">every 1 hour</option>
+                </select>
+            </div>
+            
+            <button type="submit">Create</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <p id="responseMessage"></p>
+    <script>
+        async function submitForm() {
+            const API_URL = "https://7f2g4rmw47.execute-api.us-east-1.amazonaws.com/createBackupPlan";
+            const roleArn = document.getElementById("roleArn").value;
+            const envTag = document.getElementById("envTag").value;
+            const depTag = document.getElementById("depTag").value;
+            const backupSchedule = document.getElementById("backupSchedule").value;
+            const resultElement = document.getElementById("result");
+
+            // Show a processing message
+            resultElement.textContent = "Processing...";
+
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    role_arn: roleArn,
+                    env: envTag,
+                    dep: depTag,
+                    schedule: backupSchedule
+                })
+            };
+
+            try {
+                const response = await fetch(API_URL, requestOptions);
+                const data = await response.json();
+
+                // Display the result message
+                resultElement.textContent = data.message || "Success!";
+            } catch (error) {
+                // Display error message
+                resultElement.textContent = "An error occurred: " + error.message;
+            }
+        }
+    </script>
+    <footer class="footer">
+        <div class="footer-content">
+            <P>SPARC - AWS & UPENN</P>
+            <p>Team 4 - Cost Allocation and Backup Service</p>
+            <p>Team member: Haomin Tian, Songyang Du, Yahan Xu, Zhuori Zhou</p>
+        </div>
+    </footer>
+</body>
+
+</html>
