@@ -4,8 +4,8 @@
     "liveServer.settings.CustomBrowser": "chrome",
     "liveServer.settings.https": {
       "enable": true,
-      "cert": "/Users/Silvia/Desktop/MCIT/JS & React/sparc/sparc_demo/https//localhost.pem",
-      "key": "/Users/Silvia/Desktop/MCIT/JS & React/sparc/sparc_demo/https/localhost.key",
+      "cert": "${workspaceFolder}/https/localhost.pem",
+      "key": "${workspaceFolder}/https/localhost.key",
       "passphrase": "123456"
     }
 }
