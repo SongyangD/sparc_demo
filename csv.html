@@ -10,10 +10,12 @@
 
 <body>
     <div class="navbar">
+        <img src="logo.png" alt="Logo" class="logo-image">
         <a href="instruction.html">Instructions</a>
         <a href="index.html">Create Backup Plan by Tag</a>
         <a href="ondemand.html">Ondemand Backup</a>
         <a href="csv.html">Check Report</a>
+        <a href="quicksight.html">QuickSight</a>
     </div>
 
     <div class="container">
@@ -26,18 +28,22 @@
         <div class="button-group">
             <a class="button-primary" href="#" download="combined_backup_report.csv">Download Backup Report</a>
             <a class="button-secondary"
-                href="https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/420bf3e9-2c59-4af2-b616-04ae03623750">Go
-                to QuickSight DashBoard</a>
+                href="quicksight.html">Go to QuickSight DashBoard</a>
         </div>
     </div>
-    <iframe width="1600" height="900"
+    <!-- <iframe width="1600" height="900"
         src="https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/235405876084/dashboards/420bf3e9-2c59-4af2-b616-04ae03623750?directory_alias=sparcquciksight">
-    </iframe>
+    </iframe> -->
     <footer class="footer">
         <div class="footer-content">
-            <P>SPARC - AWS & UPENN</P>
-            <p>Team 4 - Cost Allocation and Backup Service</p>
+            <p>Team 4 - BackupMate</p>
             <p>Team member: Haomin Tian, Songyang Du, Yahan Xu, Zhuori Zhou</p>
+            <P>SPARC - Sponsored by AWS & UPENN</P>
+            <div class="sponsor-images">
+                <img src="aws.png" alt="Sponsor 1" class="sponsor-image">
+                <img src="upenn.png" alt="Sponsor 2" class="sponsor-image">
+                <!-- Add more sponsor images as needed -->
+            </div>
         </div>
     </footer>
 </body>

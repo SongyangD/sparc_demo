@@ -171,3 +171,79 @@ body {
 .button-secondary:hover {
     background-color: #5a6268;
 }
+
+.logo-image {
+    height: 60px; /* Adjust as needed */
+    margin-right: 15px; /* Adds some space between the logo and the navbar */
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    /* If you have other styles for navbar, keep them */
+}
+
+.sponsor-images {
+    display: flex;
+    justify-content: center; /* Centers the images horizontally */
+    margin-bottom: 15px; /* Add some space between images and footer text */
+}
+
+.sponsor-image {
+    height: 50px; /* Adjust this as needed */
+    margin: 0 10px; /* Adds some spacing between images */
+}
+
+/* Container around the selects to position them */
+.container {
+    position: relative;
+}
+
+/* Style the dropdown select box */
+select {
+    font-size: 16px; 
+    width: 200px;  /* adjust as needed */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #dcdcdc; 
+    appearance: none;  /* Remove default appearance */
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    background-color: #f9f9f9; 
+    cursor: pointer;
+    margin: 5px 0;  /* Spacing between dropdowns */
+}
+
+/* Add a custom arrow to indicate it's a dropdown */
+select:after {
+    content: "\25BC"; 
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none; 
+}
+
+/* Style the dropdown options */
+select option {
+    padding: 8px 10px; 
+}
+
+/* Style for the input box */
+input[type="text"] {
+    font-size: 16px;
+    width: 500px;  /* adjust as needed */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #dcdcdc;
+    background-color: #f9f9f9;
+    margin: 5px 0;  /* Spacing between the input and surrounding elements */
+    transition: border 0.3s;  /* Smooth transition for the border color */
+}
+
+/* Enhance the look on focus */
+input[type="text"]:focus {
+    border-color: #007BFF;  /* Change this to your preferred color */
+    outline: none;  /* Removes the default browser outline */
+}
+
