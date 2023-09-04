@@ -1,11 +1,11 @@
-// {
-//     "liveServer.settings.port": 5501,
-//     "liveServer.settings.root": "/",
-//     "liveServer.settings.CustomBrowser": "chrome",
-//     "liveServer.settings.https": {
-//       "enable": true,
-//       "cert": ".\\https\\localhost.pem",
-//       "key": ".\\https\\localhost.key",
-//       "passphrase": "123456"
-//     }
-//   }
+{
+    "liveServer.settings.port": 5501,
+    "liveServer.settings.root": "/",
+    "liveServer.settings.CustomBrowser": "chrome",
+    "liveServer.settings.https": {
+      "enable": true,
+      "cert": "/Users/Silvia/Desktop/MCIT/JS & React/sparc/sparc_demo/https//localhost.pem",
+      "key": "/Users/Silvia/Desktop/MCIT/JS & React/sparc/sparc_demo/https/localhost.key",
+      "passphrase": "123456"
+    }
+}
